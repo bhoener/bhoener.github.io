@@ -8,7 +8,7 @@ math: true
 
 # MNIST Classifier from scratch in Java
 
-## [[Link to the full code]](https://github.com/Trickshotblaster/JavaTorch)
+## [[Link to the full code]](https://github.com/bhoener/JavaTorch)
 
 
 <img src="/assets/AsciiDigit.png" alt="MNIST digit in ASCII">

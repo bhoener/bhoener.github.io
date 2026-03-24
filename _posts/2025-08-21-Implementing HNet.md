@@ -8,7 +8,7 @@ math: true
 
 # H-Net Paper Quick (and probably incorrect) Implementation
 
-## [[Link to the full code]](https://github.com/Trickshotblaster/h-net-impl)
+## [[Link to the full code]](https://github.com/bhoener/h-net-impl)
 
 
 [[Paper Link]](https://arxiv.org/abs/2507.07955) [[Github Repo]](https://github.com/goombalab/hnet)
