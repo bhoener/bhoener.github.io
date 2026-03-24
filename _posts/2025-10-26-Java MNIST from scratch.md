@@ -184,7 +184,7 @@ To find the gradient of each intermediate result matrix, we start with the loss 
 With $\text{MSE}$, the loss is defined as
 
 $$
-\mathcal{L} = \frac{1}{N} \sum_{i=1}^n \left(y_i - \hat{y}_i\right)^2
+\mathcal{L} = \frac{1}{N} \sum_{i=1}^N \left(y_i - \hat{y}_i\right)^2
 $$
 
 Where $y_i$ is the label (in this case our one-hot vector from earlier) and 
