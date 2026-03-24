@@ -47,7 +47,8 @@ $$
 \sum_{j=1}^i\frac{ \exp(k_t^\top k_j)}{\sum_{\ell=1}^i \exp(k_t^\top k_\ell)}v_j
 $$
 
-Ideally, when $j \ne t$, the dot product between $k_t$ and $k_j$ will be relatively small and $v_j$ will not contribute much to the output. When $j=t$, $\exp(k_t^\top k_t) = \exp(||k_t||^2)$, which should be a relatively large number, so the output of attention will be $v_t$ plus some noise. Note that $k_t$ and $k_j$ do not need to be orthogonal for all $j \ne t$ in order for this to happen. Their dot product could be small or negative and it would still become squashed by the softmax relative to a large value.
+Ideally, when $j \ne t$, the dot product between $k_t$ and $k_j$ will be relatively small and $v_j$ will not contribute much to the output. When $j=t$, $\exp(k_t^\top k_t) = \exp(||k_t||^2)$, which should be a relatively large number, so the output of attention will be $v_t$ plus some noise. 
+Note that $k_t$ and $k_j$ do not need to be orthogonal for all $j \ne t$ in order for this to happen. Their dot product could be small or negative and it would still become squashed by the softmax relative to a large value.
 
 
 In removing the $\exp$, we lose this property. Basically all the keys have to be orthogonal to avoid retrieval error, which means the amount the model can remember is limited by its head dim.
@@ -272,7 +273,7 @@ Surprisingly, learning about linear attention has been the most effective tool f
 
 It seems to me that while linear attention-based architectures may become more prevalent in the future, transformers are still the best option for small models most of the time*. 
 
-> **__NOTE__** The exception to this is [RWKV](https://www.rwkv.com), which is shockingly good at small scale, and, in my experience, has performed much better than transformers for local training. If you can put up with the extremely confusing training repo and hopelessly complicated architecture, it is a very cool option to explore.
+> **NOTE** The exception to this is [RWKV](https://www.rwkv.com), which is shockingly good at small scale, and, in my experience, has performed much better than transformers for local training. If you can put up with the extremely confusing training repo and hopelessly complicated architecture, it is a very cool option to explore.
 
 I can see how ATLAS would be beneficial for much longer sequence lengths where it becomes impossible to use the full quadratic attention. However, small models hardly benefit from million-token context windows and scaling batch size is often just as effective an option as sequence length. Long-context capability definitely has a lot of potential uses (eg. DNA sequnces, massive codebases), and if done correctly, I feel that linear attention models like ATLAS could be very helpful for training and inference efficiency. 
 
@@ -290,4 +291,5 @@ Kacham, P., Mirrokni, V., & Zhong, P. (2023). PolySketchFormer: Fast Transformer
 
 Shazeer, N. (2020). GLU Variants Improve Transformer. ArXiv:2002.05202 [Cs, Stat]. https://arxiv.org/abs/2002.05202
 
-Yang, S. (2024). DeltaNet Explained (Part I) | Songlin Yang. GitHub Pages. https://sustcsonglin.github.io/blog/2024/deltanet-1/
+Yang, S. (2024). DeltaNet Explained (Part I) | 
+Songlin Yang. GitHub Pages. https://sustcsonglin.github.io/blog/2024/deltanet-1/
