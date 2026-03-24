@@ -10,7 +10,7 @@ math: true
 
 ## [[Link to the full code]](https://github.com/bhoener/atlas)
 
-<img src="AtlasTransformerLoss.png" alt="ATLAS and Transformer loss curves">
+<img src="assets/AtlasTransformerLoss.png" alt="ATLAS and Transformer loss curves">
 Loss curves for ATLAS and the transformer baseline. Try to guess which is which!
 
 
