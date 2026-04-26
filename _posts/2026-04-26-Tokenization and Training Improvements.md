@@ -431,16 +431,18 @@ In the future, I might use something like [rustbpe](https://github.com/karpathy/
 
 ## References
 
-Cheng, X., Zeng, W., Dai, D., Chen, Q., Wang, B., Xie, Z., Huang, K., Yu, X., Hao, Z., Li, Y., Zhang, H., Zhang, H., Zhao, D., & Liang, W. (2026). Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models. ArXiv.org. https://arxiv.org/abs/2601.07372
+Cheng, X., Zeng, W., Dai, D., Chen, Q., Wang, B., Xie, Z., Huang, K., Yu, X., Hao, Z., Li, Y., Zhang, H., Zhang, H., Zhao, D., & Liang, W. (2026). Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models. ArXiv.org. [https://arxiv.org/abs/2601.07372](https://arxiv.org/abs/2601.07372)
 
-Karpathy, A. (2025). GitHub - karpathy/nanochat: The best ChatGPT that $100 can buy. GitHub. https://github.com/karpathy/nanochat
+Karpathy, A. (2025). GitHub - karpathy/nanochat: The best ChatGPT that $100 can buy. GitHub. [https://github.com/karpathy/nanochat](https://github.com/karpathy/nanochat)
 
-Karpathy, A. (2024, February 20). Let’s build the GPT Tokenizer. www.youtube.com. https://www.youtube.com/watch?v=zduSFxRajkE
+Karpathy, A. (2024, February 20). Let’s build the GPT Tokenizer. www.youtube.com. [https://www.youtube.com/watch?v=zduSFxRajkE](https://www.youtube.com/watch?v=zduSFxRajkE)
 
-patel, dip. (2025, October 16). Bits-per-Byte (BPB): a tokenizer-agnostic way to measure LLMs. Medium. https://medium.com/@dip.patel.ict/bits-per-byte-bpb-a-tokenizer-agnostic-way-to-measure-llms-25dfed3f41af
+patel, dip. (2025, October 16). Bits-per-Byte (BPB): a tokenizer-agnostic way to measure LLMs. Medium. [https://medium.com/@dip.patel.ict/bits-per-byte-bpb-a-tokenizer-agnostic-way-to-measure-llms-25dfed3f41af](https://medium.com/@dip.patel.ict/bits-per-byte-bpb-a-tokenizer-agnostic-way-to-measure-llms-25dfed3f41af)
 
-Shazeer, N. (2020). GLU Variants Improve Transformer. ArXiv:2002.05202 [Cs, Stat]. https://arxiv.org/abs/2002.05202Su, J., Lu, Y., Pan, S.-F., Wen, B., & Liu, Y. (2021). RoFormer: Enhanced Transformer with Rotary Position Embedding. https://doi.org/10.48550/arxiv.2104.09864
+Shazeer, N. (2020). GLU Variants Improve Transformer. ArXiv:2002.05202 [Cs, Stat]. [https://arxiv.org/abs/2002.05202](https://arxiv.org/abs/2002.05202)
 
-Team, K., Chen, G., Zhang, Y., Su, J., Xu, W., Pan, S., Wang, Y., Wang, Y., Chen, G., Yin, B., Chen, Y., Yan, J., Wei, M., Zhang, Y., Meng, F., Hong, C., Xie, X., Liu, S., Lu, E., & Tai, Y. (2026). Attention Residuals. ArXiv.org. https://arxiv.org/abs/2603.15031
+Su, J., Lu, Y., Pan, S.-F., Wen, B., & Liu, Y. (2021). RoFormer: Enhanced Transformer with Rotary Position Embedding. [https://doi.org/10.48550/arxiv.2104.09864](https://doi.org/10.48550/arxiv.2104.09864)
 
-Zhai, S. (2026). Exclusive Self Attention. ArXiv.org. https://arxiv.org/abs/2603.09078
+Team, K., Chen, G., Zhang, Y., Su, J., Xu, W., Pan, S., Wang, Y., Wang, Y., Chen, G., Yin, B., Chen, Y., Yan, J., Wei, M., Zhang, Y., Meng, F., Hong, C., Xie, X., Liu, S., Lu, E., & Tai, Y. (2026). Attention Residuals. ArXiv.org. [https://arxiv.org/abs/2603.15031](https://arxiv.org/abs/2603.15031)
+
+Zhai, S. (2026). Exclusive Self Attention. ArXiv.org. [https://arxiv.org/abs/2603.09078](https://arxiv.org/abs/2603.09078)
