@@ -131,3 +131,150 @@ $$
  = x_1 - x_0
 $$
 
+### Slightly Longer Derivation
+
+---
+
+The authors of Flow Matching formalize this by defining the flow:
+
+$$
+\psi_t(x) = x_t
+$$
+
+Such that $\psi_0(x) = x_0$ and $\psi_1(x) = x_1$
+
+They make the assumpion that the time derivative (velocity) of the flow can be modeled by some function of the intermediate datapoints $x_t$ and time.
+
+$$
+\frac{d}{dt}\psi_t(x) = u_t(\psi_t(x))
+$$
+
+Where $u_t$ is the velocity vector pointing from $x_0$ to $x_1$. 
+
+We do not know $u_t(\cdot)$, so we want to approximate it with a neural network $v_t^\theta(\cdot)$.
+
+This can be done by minimizing the objective:
+
+$$
+\mathbb{E}_{x_t \sim p_t(x_t)}[||u_t(x_t) - v_t^\theta(x_t)||_2^2]
+$$
+
+Doing some tricks, we can expand to get
+
+$$
+\mathbb{E}_{x_t \sim p_t(x_t)}[||u_t(x_t)||_2^2 -2u_t(x_t)v_t^\theta(x_t) + ||v_t^\theta(x_t)||_2^2]
+$$
+
+Focusing on the middle term, we can rewrite as an expectation
+
+$$
+\mathbb{E}_{x_t \sim p_t(x_t)}[2u_t(x_t)v_t^\theta(x_t)] = \int 2u_t(x_t)v_t^\theta(x_t) p_t(x_t) dx_t 
+$$
+
+$$
+\mathbb{E}_{x_t \sim p_t(x_t)}[2u_t(x_t)v_t^\theta(x_t)] = \int 2u_t(x_t)v_t^\theta(x_t) p_t(x_t) dx_t 
+$$
+
+Focusing on $u_t(x_t)$, we can marginalize:
+
+$$
+u_t(x_t) = \int u_t(x_t|x_1) \frac{p_t(x_t|x_1)q(x_1)}{p_t(x_t)}dx_1
+$$
+
+Since $p(x_1 \vert x_t) = \frac{p_t(x_t \vert x_1)q(x_1)}{p_t(x_t)}$ and $u_t(x_t) = \int u_t(x_t \vert x_1)p(x_1 \vert x_t)dx_1$
+
+But what does $ u_t (x_t \vert x_1) $ mean?
+
+Realistically, we will always have more than one datapoint in the dataset. At any given "location", there will be multiple valid paths to data, depending on which datapoint you want to go to. $u_t(x_t \vert x_1)$ is the velocity vector pointing to the particular datapoint $x_1$. 
+
+Then, we can rewrite the full expectation as
+
+$$
+\int 2u_t(x_t)v_t^\theta(x_t) p_t(x_t) dx_t  = \int 2\left(\int u_t(x_t|x_1) \frac{p_t(x_t|x_1)q(x_1)}{p_t(x_t)}dx_1\right)v_t^\theta(x_t) p_t(x_t) dx_t 
+$$
+
+There is a [very convenient theorem](https://en.wikipedia.org/wiki/Fubini's_theorem) that allows us to rewrite the integral of an integral as a double integal under certain conditions:
+
+$$
+\int_Y \left(\int_X f(x, y) dx\right)dy = \iint_{X \times Y} f(x, y) dx dy
+$$
+
+This gives us:
+
+
+$$
+\int 2\left(\int u_t(x_t|x_1) \frac{p_t(x_t|x_1)q(x_1)}{p_t(x_t)}dx_1\right)v_t^\theta(x_t) p_t(x_t) dx_t  = 2 \iint u_t(x_t|x_1)\frac{p_t(x_t|x_1)q(x_1)}{\cancel{p_t(x_t)}}v_t^\theta(x_t)\cancel{p_t(x_t)}dx_t dx_1
+$$
+
+
+$$
+ = 2 \iint u_t(x_t|x_1)p_t(x_t|x_1)q(x_1)v_t^\theta(x_t)dx_t dx_1
+$$
+
+We can rewrite this as an expectation
+
+$$
+ = 2 \mathbb{E}_{x_t \sim p_t(x_t), x_t \sim p_1(x_1)} [u_t(x_t|x_1) v_t^\theta(x_t)]
+$$
+
+Plugging this back into the original expression, we get
+
+$$
+\mathbb{E}_{x_t \sim p_t(x_t), x_1 \sim p_1(x_1)}[||u_t(x_t)||_2^2 -2u_t(x_t|x_1)v_t^\theta(x_t) + ||v_t^\theta(x_t)||_2^2]
+$$
+
+We can add and subtract $\vert \vert u_t(x_t \vert x_1)\vert \vert^2$
+
+$$
+ = \mathbb{E}_{x_t \sim p_t(x_t), x_1 \sim p_1(x_1)}[||u_t(x_t)||_2^2 -2u_t(x_t|x_1)v_t^\theta(x_t) + ||v_t^\theta(x_t)||_2^2 + ||u_t(x_t|x_1)||^2 - ||u_t(x_t|x_1)||^2]
+$$
+
+And since
+$$
+||v_t^\theta(x_t)||_2^2 -2u_t(x_t|x_1)v_t^\theta(x_t) + ||u_t(x_t|x_1)||^2 = ||v_t^\theta(x_t) - u_t(x_t|x_1)||^2
+$$
+
+We get
+
+$$
+ ... = \mathbb{E}_{x_t \sim p_t(x_t), x_1 \sim p_1(x_1)}[||v_t^\theta(x_t) - u_t(x_t|x_1)||^2 + ||u_t(x_t)||_2^2 + ||u_t(x_t|x_1)||^2]
+$$
+
+
+$$
+ = \mathbb{E}_{x_t \sim p_t(x_t), x_1 \sim p_1(x_1)}[||v_t^\theta(x_t) - u_t(x_t|x_1)||^2] + \underbrace{\cancel{\mathbb{E}_{x_t \sim p_t(x_t), x_1 \sim p_1(x_1)}[||u_t(x_t)||_2^2] + \mathbb{E}_{x_t \sim p_t(x_t), x_1 \sim p_1(x_1)}[||u_t(x_t|x_1)||^2]}}_{\text{constant wrt. } \theta}
+$$
+
+And we are left with
+
+$$
+\mathbb{E}_{x_t \sim p_t(x_t), x_1 \sim p_1(x_1)}[||v_t^\theta(x_t) - u_t(x_t|x_1)||^2]
+$$
+
+We still need to define $u_t(x_t\vert x_1)$
+
+The authors choose to define the flow using linear interpolation as
+
+$$
+\psi_t(x_0; x_1) = (1-t)x_0 + tx_1 
+$$
+
+We can sample some noise $\epsilon \sim \mathcal{N}(0, I)$ to be $x_0$, a timestep $t \in [0, 1]$ and a clean image $x$.
+
+This gives us a final objective of
+
+$$
+\mathbb{E}_{x, t, \epsilon}[||v_t^\theta((1 - t)\epsilon + t x) - u_t((1 - t)\epsilon + t x)||^2]
+$$
+
+$$
+= \boxed{\mathbb{E}_{x, t, \epsilon}[||v_t^\theta((1 - t)\epsilon + t x) - (x - \epsilon)||^2]}
+$$
+
+If you want to learn more, I highly recommend both the [Outlier video on Flow Matching](https://www.youtube.com/watch?v=7cMzfkWFWhI) and the [MIT lecture series by Peter Holderrieth](https://www.youtube.com/playlist?list=PL57nT7tSGAAXwjhDYcxEycx5W7YoSrZyt)
+
+## Implementation
+
+As it turns out, the difficult part about image models is not the math or theory behind them, but rather the architecture. Flow matching is incredibly simple in concept, simply predicting $x_1 - x_0$ given $x_t$. Yet it requires an incredible amount of architectural duct-tape and magic tricks to get even a mildly decent result.
+
+After the failure of my U-net, I decided to look into [DiTs](https://arxiv.org/abs/2212.09748). The DiT architecture itself isn't too different from that of a normal text-based transformer.
