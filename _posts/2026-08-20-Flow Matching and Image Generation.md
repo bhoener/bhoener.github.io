@@ -14,13 +14,13 @@ math: true
 
 Images are hard. Very hard.
 
-I have spent the last ~2 years working almost exclusively on text-based models and NLP. Too often, I take for granted the simplicity of the GPT-style architecture and training setup.
+I have spent the last ~2 years working almost exclusively on text-based models and NLP. I often take for granted the simplicity of the GPT-style architecture and training setup.
 
-I assumed diffusion would be relatively easy. Perhaps a few conv layers stacked on top of one another, maybe even with some residuals mixed in.
+I assumed diffusion would be relatively easy. A few convolution layers stacked on top of one another, maybe with some residuals.
 
-I watched [videos](https://share.google/IKD0tTmeB7RfxDpNk) and felt like I understood the math. How hard could it be just to predict the noise?
+I watched [videos](https://share.google/IKD0tTmeB7RfxDpNk), took [notes](https://github.com/bhoener/diffusion-notes), and felt like I understood the math. 
 
-But nothing could have prepared me for the rabbit hole into which I was about to descend.
+But actually making a usable model was far more difficult than I would have imagined.
 
 ---
 
@@ -35,7 +35,7 @@ $$
 p_\theta(x) = \frac{e^{-f_\theta(x)}}{\underbrace{Z_\theta}_\text{normalize}}
 $$
 
-Where $Z_\theta$ is a normalizing constant we divide by toensure everything integrates to 1.
+Where $Z_\theta$ is a normalizing constant we divide by to ensure everything integrates to 1.
 
 It is hard to find $Z_\theta$ in practice since it would require integrating over all possible $x$, so we must take a slightly different approach.
 
@@ -134,6 +134,8 @@ $$
 ### Slightly Longer Derivation
 
 ---
+
+(This is mostly following the resources I used to learn, especially the [Outlier video](https://www.youtube.com/watch?v=7cMzfkWFWhI). I am not good enough at math to do the full derivation on my own)
 
 The authors of Flow Matching formalize this by defining the flow:
 
